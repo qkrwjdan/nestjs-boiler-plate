@@ -10,9 +10,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { mongodbFactory } from './config/mongoose.config';
 import { ConfigModule } from '@nestjs/config';
 import { winstonConfig } from './config/winston.config';
+import { envValidationSchema } from './config/env.config';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      validationSchema: envValidationSchema,
       envFilePath: '.env',
       isGlobal: true,
     }),
