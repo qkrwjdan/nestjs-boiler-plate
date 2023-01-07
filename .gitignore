@@ -36,3 +36,5 @@ lerna-debug.log*
 
 # Project custom settings
 custom-logs-all
+
+.env
