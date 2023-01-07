@@ -11,8 +11,15 @@ import {
 import { NestModule } from '@nestjs/common';
 import { MiddlewareConsumer } from '@nestjs/common';
 import { LoggerMiddleware } from 'src/middleware/logger.middleware';
+import { MongooseModule } from '@nestjs/mongoose';
+import { mongodbFactory } from './config/mongoose.config';
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+    }),
     WinstonModule.forRoot({
       transports: [
         new winston.transports.Console({
@@ -37,6 +44,7 @@ import { LoggerMiddleware } from 'src/middleware/logger.middleware';
         }),
       ],
     }),
+    MongooseModule.forRootAsync(mongodbFactory),
     StoresModule,
   ],
   controllers: [AppController],
